@@ -64,7 +64,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     </form>
     <a href="principal.php">Voltar</a>
 
-    <adress
+    <center>
+  <address>Lucas Magalhães Sarmento | Estudante | Técnico de desenvolvimento de sistema</address>
+</center>
 </body>
 </html>
 

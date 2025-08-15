@@ -95,5 +95,9 @@ $opcoes_menu = $permissoes[$id_perfil] ?? [];
             <?php endforeach; ?>
         </ul>
     </nav>
+
+    <center>
+  <address>Lucas Magalhães Sarmento | Estudante | Técnico de desenvolvimento de sistema</address>
+</center>
 </body>
 </html>

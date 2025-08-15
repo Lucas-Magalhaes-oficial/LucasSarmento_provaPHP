@@ -23,7 +23,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }else{
             $sql = "SELECT * FROM usuario WHERE nome LIKE :busca_nome";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':busca_nome',"%$busca%",PDO::PARAM_INT);
+            //adiona o caractere de porcentagem para busca parcial
+            $buscaLike = "%$busca%";
+            $stmt->bindParam(':busca_nome', $buscaLike, PDO::PARAM_STR);
         }
 
         $stmt->execute();
@@ -76,6 +78,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <option value="3" <?=$usuario['id_perfil'] == 3 ?'select':''?>>Almoxarife</option>
                 <option value="4" <?=$usuario['id_perfil'] == 4 ?'select':''?>>Cliente</option>
             </select>
+
+            <!-- se o usuario logado for admin, exibir a opção de alterar senha -->
+             <?php if ($_SESSION['perfil'] == 1): ?>
+                <label for="nova_senha">Nova Senha</label>
+                <input type="password" id="nova_senha" name="nova_senha">
+            <?php endif; ?>
+            <button type="submit">Alterar</button>
+            <button type="reset">Cancelar</button>
          </form>
+    <?php endif; ?>
+    <a href="principal">Voltar</a>
+
+
+    <center>
+  <address>Lucas Magalhães Sarmento | Estudante | Técnico de desenvolvimento de sistema</address>
+</center>
 </body>
 </html>

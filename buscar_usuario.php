@@ -74,5 +74,10 @@ $usuarios = $stmt->fetchALL(PDO::FETCH_ASSOC);
         <p>Nenhum usuario encontrado.</p>
     <?php endif;?>
     <a href="principal.php"> VOLTAR</a>
+
+
+    <center>
+  <address>Lucas Magalhães Sarmento | Estudante | Técnico de desenvolvimento de sistema</address>
+</center>
 </body>
 </html>
