@@ -75,6 +75,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </script>
 
 
+<br>
+        <br>
 <center>
   <address>Lucas Magalhães Sarmento | Estudante | Técnico de desenvolvimento de sistema</address>
 </center>

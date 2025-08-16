@@ -90,7 +90,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <?php endif; ?>
     <a href="principal">Voltar</a>
 
-
+<br>
+        <br>
     <center>
   <address>Lucas Magalhães Sarmento | Estudante | Técnico de desenvolvimento de sistema</address>
 </center>

@@ -41,40 +41,48 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>excluir usuario</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h2>Excluir Usuario</h2>
     <?php if(!empty($usuarios)): ?>
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Perfil</th>
-                <th>Ações</th>
-            </tr>
-        <?php foreach($usuarios as $usuario): ?>
-            <tr>
-                <td><?= htmlspecialchars($usuario['id_usuario'])?></td>
-                <td><?= htmlspecialchars($usuario['nome'])?></td>
-                <td><?= htmlspecialchars($usuario['email'])?></td>
-                <td><?= htmlspecialchars($usuario['id_perfil'])?></td>
+        <div class="container mt-4">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover text-center">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Perfil</th>
+                        <th>Ações</th>
+                    </tr>
+                <?php foreach($usuarios as $usuario): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($usuario['id_usuario'])?></td>
+                        <td><?= htmlspecialchars($usuario['nome'])?></td>
+                        <td><?= htmlspecialchars($usuario['email'])?></td>
+                        <td><?= htmlspecialchars($usuario['id_perfil'])?></td>
 
-                <td>
-                    <a href="excluir_usuario.php?id=<?= htmlspecialchars($usuario['id_usuario'])?>" onclick="return confirm('tem certeza que deseja excluir este usuario?')">Excluir</a>
-                </td>
-            </tr>
-        <?php endforeach;?>
-        </table>
+                        <td>
+                            <a href="excluir_usuario.php?id=<?= htmlspecialchars($usuario['id_usuario'])?>" onclick="return confirm('tem certeza que deseja excluir este usuario?')">Excluir</a>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+                </table>
+            </div>
+        </div>
         <?php else:?>
             <p>Nenhum usuario encontrado</p>
         <?php endif;?>
 
         <a href="principal.php">Voltar</a>
 
+        <br>
+        <br>
         <center>
   <address>Lucas Magalhães Sarmento | Estudante | Técnico de desenvolvimento de sistema</address>
 </center>
+<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

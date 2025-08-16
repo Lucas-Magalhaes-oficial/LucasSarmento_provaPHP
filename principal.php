@@ -96,6 +96,8 @@ $opcoes_menu = $permissoes[$id_perfil] ?? [];
         </ul>
     </nav>
 
+    <br>
+        <br>
     <center>
   <address>Lucas Magalhães Sarmento | Estudante | Técnico de desenvolvimento de sistema</address>
 </center>
