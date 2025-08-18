@@ -45,6 +45,58 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<?php
+$permissoes = [
+    1 => [
+        "Cadastrar" => ["cadastro_usuario.php", "cadastro_perfil.php", "cadastro_cliente.php", "cadastro_fornecedor.php", "cadastro_produto.php", "cadastro_funcionario.php"],
+        "Buscar"    => ["buscar_usuario.php", "buscar_perfil.php", "buscar_cliente.php", "buscar_fornecedor.php", "buscar_produto.php", "buscar_funcionario.php"],
+        "Alterar"   => ["alterar_usuario.php", "alterar_perfil.php", "alterar_cliente.php", "alterar_fornecedor.php", "alterar_produto.php", "alterar_funcionario.php"],
+        "Excluir"   => ["excluir_usuario.php", "excluir_perfil.php", "excluir_cliente.php", "excluir_fornecedor.php", "excluir_produto.php", "excluir_funcionario.php"]
+    ],
+    2 => [
+        "Cadastrar" => ["cadastro_cliente.php"],
+        "Buscar"    => ["buscar_cliente.php", "buscar_fornecedor.php", "buscar_produto.php"],
+        "Alterar"   => ["alterar_fornecedor.php", "alterar_produto.php"],
+        "Excluir"   => ["excluir_produto.php"]
+    ],
+    3 => [
+        "Cadastrar" => ["cadastro_fornecedor.php", "cadastro_produto.php"],
+        "Buscar"    => ["buscar_cliente.php", "buscar_fornecedor.php", "buscar_produto.php"],
+        "Alterar"   => ["alterar_fornecedor.php", "alterar_produto.php"],
+        "Excluir"   => ["excluir_produto.php"]
+    ],
+    4 => [
+        "Cadastrar" => ["cadastro_usuario.php"],
+        "Buscar"    => ["buscar_produto.php"],
+        "Alterar"   => ["alterar_cliente.php"]
+    ]
+];
+
+$id_perfil = (int) $_SESSION['perfil'];
+$opcoes_menu = $permissoes[$id_perfil] ?? [];
+
+?>
+<!-- MENU -->
+<nav>
+        <ul class="menu">
+            <?php foreach ($opcoes_menu as $categoria => $arquivos): ?>
+                <li class="dropdown">
+                    <a href="#"><?= htmlspecialchars($categoria) ?></a>
+                    <ul class="dropdown-menu">
+                        <?php foreach ($arquivos as $arquivo): ?>
+                            <li>
+                                <a href="<?= htmlspecialchars($arquivo) ?>">
+                                    <?= ucwords(str_replace('_', ' ', basename($arquivo, '.php'))) ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
+
     <h2>Excluir Usuario</h2>
     <?php if(!empty($usuarios)): ?>
         <div class="container mt-4">
@@ -65,7 +117,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
                         <td><?= htmlspecialchars($usuario['id_perfil'])?></td>
 
                         <td>
-                            <a href="excluir_usuario.php?id=<?= htmlspecialchars($usuario['id_usuario'])?>" onclick="return confirm('tem certeza que deseja excluir este usuario?')">Excluir</a>
+                            <a href="excluir_usuario.php?id=<?= htmlspecialchars($usuario['id_usuario'])?>" onclick="return confirm('tem certeza que deseja excluir este usuario?')"class="btn btn-danger btn-sm">Excluir</a>
                         </td>
                     </tr>
                 <?php endforeach;?>
