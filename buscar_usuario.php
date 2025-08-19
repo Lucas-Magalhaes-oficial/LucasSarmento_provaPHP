@@ -98,7 +98,7 @@ $usuarios = $stmt->fetchALL(PDO::FETCH_ASSOC);
     </nav>
 
     <h2>Lista de Usuarios</h2>
-    <form action="buscar_usuario.php" method="POST">
+    <form action="buscar_usuario.php" method="POST" onsubmit="return validarBusca()">
         <label for="busca">Digite o ID ou Nome(opcional): </label>
         <input type="text" id="busca" name="busca">
         <button type="submit">Pesquisar</button>

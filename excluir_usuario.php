@@ -118,6 +118,7 @@ $opcoes_menu = $permissoes[$id_perfil] ?? [];
 
                         <td>
                             <a href="excluir_usuario.php?id=<?= htmlspecialchars($usuario['id_usuario'])?>" onclick="return confirm('tem certeza que deseja excluir este usuario?')"class="btn btn-danger btn-sm">Excluir</a>
+                            
                         </td>
                     </tr>
                 <?php endforeach;?>

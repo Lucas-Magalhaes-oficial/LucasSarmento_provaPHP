@@ -103,7 +103,7 @@ $opcoes_menu = $permissoes[$id_perfil] ?? [];
     </nav>
 
     <h2>Alterar Usuario</h2>
-    <form action="alterar_usuario.php" method="POST">
+    <form action="alterar_usuario.php" method="POST" onsubmit="return validarAlterar()">
         <label for="busca_usuario">Digite o id ou nome do usuario</label>
         <input type="text" id="busca_usuario" name="busca_usuario" require onkeyup="buscarSugestoes()">
 

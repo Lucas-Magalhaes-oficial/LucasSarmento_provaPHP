@@ -1,156 +1,107 @@
-function validarFuncionario() {
-    let nome = document.getElementById("nome_funcionario").value;
-    let telefone = document.getElementById("telefone").value;
-    let email = document.getElementById("email").value;
-
-    if (nome.length < 3) {
-        alert("O nome do funcionário deve ter pelo menos 3 caracteres.");
-        return false;
-    }
-
-    let regexTelefone = /^[0-9]{10,11}$/;
-    if (!regexTelefone.test(telefone)) {
-        alert("Digite um telefone válido (10 ou 11 dígitos).");
-        return false;
-    }
-
-    let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regexEmail.test(email)) {
-        alert("Digite um e-mail válido.");
-        return false;
-    }
-
-    return true;
-}
-
-
 function validarUsuario() {
-    let nome = document.getElementById("nome").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let senha = document.getElementById("senha").value;
-    let id_perfil = document.getElementById("id_perfil").value;
+    const nomeEl   = document.getElementById("nome");
+    const emailEl  = document.getElementById("email");
+    const senhaEl  = document.getElementById("senha");
+    const perfilEl = document.getElementById("id_perfil");
 
-    // Validação do nome
-    if (nome.length < 3) {
-        alert("O nome deve ter pelo menos 3 caracteres.");
-        document.getElementById("nome").focus();
+    const nome   = (nomeEl?.value || "").trim();
+    const email  = (emailEl?.value || "").trim();
+    const senha  = (senhaEl?.value || "");
+    const perfil = (perfilEl?.value || "").trim();
+
+    // Nome: mínimo 3, apenas letras/acentos/apóstrofo e espaços
+    const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ'\s]{3,}$/;
+    if (!nomeRegex.test(nome)) {
+        alert(" Nome inválido. Use apenas letras (com acentos), espaços e apóstrofo, com pelo menos 3 caracteres.");
+        nomeEl.focus();
         return false;
     }
 
-    if (nome.length > 50) {
-        alert("O nome deve ter no máximo 50 caracteres.");
-        document.getElementById("nome").focus();
+    // E-mail
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!emailRegex.test(email)) {
+        alert(" Informe um e-mail válido (ex: usuario@dominio.com).");
+        emailEl.focus();
         return false;
     }
 
-    // Validação para não permitir números no nome
-    let regexNome = /^[a-zA-ZÀ-ÿ\s]+$/;
-    if (!regexNome.test(nome)) {
-        alert("O nome não pode conter números ou caracteres especiais.");
-        document.getElementById("nome").focus();
+    // Senha
+    if (senha.length < 6) {
+        alert(" A senha deve ter no mínimo 6 caracteres.");
+        senhaEl.focus();
+        return false;
+    }
+    if (/\s/.test(senha)) {
+        alert(" A senha não pode conter espaços.");
+        senhaEl.focus();
+        return false;
+    }
+    if (!/[A-Za-z]/.test(senha) || !/\d/.test(senha)) {
+        alert(" A senha deve conter ao menos uma letra e um número.");
+        senhaEl.focus();
         return false;
     }
 
-    // Validação do email
-    let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regexEmail.test(email)) {
-        alert("Digite um e-mail válido.");
-        document.getElementById("email").focus();
-        return false;
-    }
-
-    if (email.length > 60) {
-        alert("O e-mail deve ter no máximo 60 caracteres.");
-        document.getElementById("email").focus();
-        return false;
-    }
-
-    // Validação da senha
-    if (senha.length < 8) {
-        alert("A senha deve ter pelo menos 8 caracteres.");
-        document.getElementById("senha").focus();
-        return false;
-    }
-
-    if (senha.length > 50) {
-        alert("A senha deve ter no máximo 50 caracteres.");
-        document.getElementById("senha").focus();
-        return false;
-    }
-
-    // Validação do perfil
-    if (id_perfil === "" || id_perfil === "0") {
-        alert("Selecione um perfil válido.");
-        document.getElementById("id_perfil").focus();
+    // Perfil
+    if (!["1", "2", "3", "4"].includes(perfil)) {
+        alert(" Selecione um perfil válido.");
+        perfilEl.focus();
         return false;
     }
 
     return true;
 }
 
-function validarAlteracaoUsuario() {
-    let nome = document.getElementById("nome").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let id_perfil = document.getElementById("id_perfil").value;
-    let nova_senha = document.getElementById("nova_senha");
+function validarBusca() {
+    const busca = document.getElementById("busca").value.trim();
 
-    // Validação do nome
-    if (nome.length < 3) {
-        alert("O nome deve ter pelo menos 3 caracteres.");
-        document.getElementById("nome").focus();
+    if (busca === "") {
+        return confirm("Nenhum termo informado. Deseja listar todos os usuários?");
+    }
+
+    const numeroRegex = /^[0-9]+$/;
+    const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ'\s]+$/; // mesmo do cadastrar/alterar
+
+    if (!(numeroRegex.test(busca) || nomeRegex.test(busca))) {
+        alert(" Digite apenas números (ID) ou letras (Nome).");
+        document.getElementById("busca").focus();
         return false;
     }
 
-    if (nome.length > 50) {
-        alert("O nome deve ter no máximo 50 caracteres.");
-        document.getElementById("nome").focus();
+    return true;
+}
+
+function validarAlterar() {
+    const nomeEl   = document.getElementById("nome");
+    const emailEl  = document.getElementById("email");
+    const perfilEl = document.getElementById("perfil");
+
+    const nome   = nomeEl.value.trim();
+    const email  = emailEl.value.trim();
+    const perfil = perfilEl.value.trim();
+
+    // Nome igual ao do cadastrar
+    const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ'\s]{3,}$/;
+    if (!nomeRegex.test(nome)) {
+        alert(" Nome inválido! Digite apenas letras, com no mínimo 3 caracteres.");
+        nomeEl.focus();
         return false;
     }
 
-    // Validação para não permitir números no nome
-    let regexNome = /^[a-zA-ZÀ-ÿ\s]+$/;
-    if (!regexNome.test(nome)) {
-        alert("O nome não pode conter números ou caracteres especiais.");
-        document.getElementById("nome").focus();
+    // E-mail igual ao do cadastrar
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!emailRegex.test(email)) {
+        alert(" Email inválido!");
+        emailEl.focus();
         return false;
     }
 
-    // Validação do email
-    let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regexEmail.test(email)) {
-        alert("Digite um e-mail válido.");
-        document.getElementById("email").focus();
+    // Perfil: precisa ser número válido
+    if (perfil === "" || isNaN(perfil)) {
+        alert(" Perfil inválido!");
+        perfilEl.focus();
         return false;
     }
 
-    if (email.length > 60) {
-        alert("O e-mail deve ter no máximo 60 caracteres.");
-        document.getElementById("email").focus();
-        return false;
-    }
-
-    // Validação do perfil
-    if (id_perfil === "" || id_perfil === "0") {
-        alert("Selecione um perfil válido.");
-        document.getElementById("id_perfil").focus();
-        return false;
-    }
-
-    // Validação da nova senha (se fornecida)
-    if (nova_senha && nova_senha.value !== "") {
-        if (nova_senha.value.length < 8) {
-            alert("A nova senha deve ter pelo menos 8 caracteres.");
-            nova_senha.focus();
-            return false;
-        }
-
-        if (nova_senha.value.length > 50) {
-            alert("A nova senha deve ter no máximo 50 caracteres.");
-            nova_senha.focus();
-            return false;
-        }
-    }
-
-return true;
-
+    return true;
 }
