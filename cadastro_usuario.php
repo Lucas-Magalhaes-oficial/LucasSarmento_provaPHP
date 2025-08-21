@@ -70,6 +70,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel principal</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js"></script>
 </head>
@@ -117,11 +118,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         <button type="submit">Salvar</button>
         <button type="reset">Cancelar</button>
     </form>
-    <a href="principal.php">Voltar</a>    
+    <a href="principal.php" class="btn btn-primary btn-sm">Voltar</a>
+    
     
     <br><br>
     <center>
         <address>Lucas Magalhães Sarmento | Estudante | Técnico de desenvolvimento de sistema</address>
     </center>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

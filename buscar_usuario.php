@@ -133,7 +133,7 @@ $usuarios = $stmt->fetchALL(PDO::FETCH_ASSOC);
     <?php else:?>
         <p>Nenhum usuario encontrado.</p>
     <?php endif;?>
-    <a href="principal.php"> Voltar</a>
+    <a href="principal.php" class="btn btn-primary btn-sm"> Voltar</a>
 
 <br><br>
     <center>
